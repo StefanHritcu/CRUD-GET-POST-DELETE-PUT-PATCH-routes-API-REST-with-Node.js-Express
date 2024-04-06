@@ -36,3 +36,20 @@ export const getFilteredUsers = async (req, res) => {
     }
 };
 
+export const getUsersStatistics = async (req, res) => {
+    try{
+        const statistics = await User.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalCount: {$sum: 1},
+                    unmarriedCount: { $sum: { $cond: { if: { $eq: ["$married", false] }, then: 1, else: 0 } } }
+                }
+            }
+        ])
+        res.status(200).json(statistics)
+
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
