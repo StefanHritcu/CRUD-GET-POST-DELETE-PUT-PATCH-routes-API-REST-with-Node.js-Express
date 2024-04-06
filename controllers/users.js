@@ -2,6 +2,7 @@ import { User } from "../models/user.js"
 
 let users = []
 
+//----------------------------  GET  ------------------------------------
 export const getUserById = async (req, res) => {
     try{
         const { id } = req.params
@@ -22,7 +23,6 @@ export const getAllUsers = async (req, res) => {
         res.status(404).json({message: error.message})
     }
 }
-
 
 export const getFilteredUsers = async (req, res) => {
     try {
@@ -50,6 +50,19 @@ export const getUsersStatistics = async (req, res) => {
         res.status(200).json(statistics)
 
     } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+//----------------------------  POST  ------------------------------------
+export const insertUser = async (req, res) => {
+    const user = req.body
+    const newUser = new User(user)
+    try{
+        await newUser.save()
+        res.status(201).json(newUser)
+
+    } catch (errorll) {
         res.status(404).json({message: error.message})
     }
 }
