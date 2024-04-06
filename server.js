@@ -5,7 +5,7 @@ import cors from "cors"
 
 const app = express()
 const PORT = process.env.PORT || 3000
-const CONNECTION_URL = "mongodb://localhost:27017/YOUR DATABASE"
+const CONNECTION_URL = "mongodb://localhost:27017/git-operations"
 
 app.use("/users", usersRouter)
 app.use(cors())
