@@ -76,3 +76,16 @@ export const deleteAllUsers = async (req, res) => {
         res.status(404).json({message: error.message})
     }
 }
+
+export const deletUserById = async (req, res) => {
+    const { id } = req.params
+    try{
+       await User.findByIdAndDelete(id)
+       res.status(200).json({message: "User deleted with success"})
+
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+//----------------------------  PUT  ------------------------------------
