@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    statusConfermato: {
+        type: Boolean,
+        require: true
+    },
 }, {timestamps: true})
 
 export const User = mongoose.model("user", userSchema)

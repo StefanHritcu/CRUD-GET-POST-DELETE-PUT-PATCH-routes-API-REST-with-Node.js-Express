@@ -88,9 +88,6 @@ export const deletUserById = async (req, res) => {
     }
 }
 
-//----------------------------  PUT  ------------------------------------
-
-
 //----------------------------  PATCH ------------------------------------
 export const updateUserById = async (req, res) => {
     const { id } = req.params
@@ -99,7 +96,21 @@ export const updateUserById = async (req, res) => {
     try{
         const user = await User.findByIdAndUpdate(id, data, {new: true})
         res.status(200).json(user)
-        
+
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+//----------------------------  PUT  ------------------------------------
+export const replaceUserById = async (req, res) => {
+    const { id } = req.params
+    const data = { ...req.body }
+
+    try{
+        const user = await User.findByIdAndUpdate(id, data, {overwrite: false})
+        res.status(200).json(user)
+
     } catch (error) {
         res.status(404).json({message: error.message})
     }

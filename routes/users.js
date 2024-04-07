@@ -1,5 +1,5 @@
 import express from "express"
-import { getAllUsers, getFilteredUsers, getUsersStatistics, getUserById, insertUser, deleteAllUsers, deletUserById, updateUserById } from "../controllers/users.js"
+import { getAllUsers, getFilteredUsers, getUsersStatistics, getUserById, insertUser, deleteAllUsers, deletUserById, updateUserById, replaceUserById } from "../controllers/users.js"
 
 const router = express.Router()
 
@@ -14,5 +14,6 @@ router.delete("/", deleteAllUsers)
 router.get("/:id", getUserById)
 router.delete("/:id", deletUserById)
 router.patch("/:id", updateUserById)
+router.put("/:id", replaceUserById)
 
 export default router
