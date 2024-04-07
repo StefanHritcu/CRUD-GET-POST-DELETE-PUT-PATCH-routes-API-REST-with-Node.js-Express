@@ -56,13 +56,23 @@ export const getUsersStatistics = async (req, res) => {
 
 //----------------------------  POST  ------------------------------------
 export const insertUser = async (req, res) => {
-    const user = req.body
-    const newUser = new User(user)
+        const user = req.body
+        const newUser = new User(user)
     try{
         await newUser.save()
         res.status(201).json(newUser)
 
-    } catch (errorll) {
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+//----------------------------  DELETE  ------------------------------------
+export const deleteAllUsers = async (req, res) => {
+    try{
+        const result = await User.deleteMany({});
+            res.status(200).json({message: "All users was deleted with success"})
+    } catch (error) {
         res.status(404).json({message: error.message})
     }
 }
